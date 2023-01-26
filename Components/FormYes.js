@@ -3,7 +3,9 @@ import {Text ,View, ActivityIndicator, StyleSheet, Image} from 'react-native';
 import { Overlay } from '@rneui/base';
 
 const FormYes =(props)=>{
-
+    /*
+This runs when the user has created their account to signal that their account has been successfully made.
+*/
     return(
         props.successMessage?
             <Overlay overlayStyle={styles.Overlay} isVisivle={true} onBackdropPress={()=>props.close('')}>

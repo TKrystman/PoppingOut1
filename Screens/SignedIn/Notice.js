@@ -19,7 +19,7 @@ function navigate() {
 
   useLayoutEffect(() => {
     const collectionRef = collection(db, 'chats');
-    const q = query(collectionRef, orderBy('createdAt','desc'));
+    const q = query(collectionRef, orderBy('createdAt','desc')); //this calls the chats within firebase and displays them for the user.
     const unsubscribe = onSnapshot(q, snapshot => {
       console.log('snapshot');
       setMessages(
@@ -35,7 +35,7 @@ function navigate() {
     
     return () => unsubscribe();
   }, []); 
-
+//when a new chat is added this is called to add it to the fire base doc
 const onSend = useCallback((messages = []) => {
 setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
 const {_id, createdAt, text, user} = messages[0];
@@ -50,7 +50,7 @@ addDoc(collection(db, 'chats'), {
 
 return(
 <ImageBackground
-
+//Background image to add depth
  resizeMode="cover"
  source={require("../../assets/images/Backgorund.jpg")}
  style={{ flex: 1, backgroundColor:'#c9bea7',}}
@@ -66,17 +66,17 @@ return(
     _id: authentication?.currentUser?.email,
    
     }}
-    renderInputToolbar={props => customtInputToolbar(props)}
+    renderInputToolbar={props => customtInputToolbar(props)} //Renders in the chatbar at the bottom of the page
 
     renderBubble={(props) => (
       <Bubble {...props}
       textStyle={{ 
         right:{
-    fontSize:20,
+    fontSize:20, //These are styles for the chat text
     color: '#6b564e',
     fontFamily: 'Bodoni 72 Oldstyle',
       },
-      left:{
+      left:{ //The style for other users 
         fontSize:20,
         color: '#ffffff',
         fontFamily: 'Bodoni 72 Oldstyle',
@@ -84,7 +84,7 @@ return(
     }}
       wrapperStyle={{
         left:{
-          left:-50,
+          left:-50,//These are styles for the chat bubble
           color:'#000',
           height:52,
           backgroundColor:'#6b564e',
@@ -95,7 +95,7 @@ return(
           alignItems:'center',
          
         },
-        right:{
+        right:{//The style for other users 
         
           color:'#000',
           height:52,
@@ -125,14 +125,14 @@ return(
 
   const customtInputToolbar = props => {
     return (
-      <InputToolbar
-        {...props}
+      <InputToolbar 
+        {...props}//This is the styling for the chatbar
         containerStyle={{
           backgroundColor: "#dfd2bf",
           borderTopColor: "#E8E8E8",
      
           padding: 3,
-          borderRadius: 10,
+          borderRadius: 10, //adds depth to it to bring it away from the screen to direct the user to click it 
           shadowColor: 'rgba(0, 0, 0, 0.8)',
    shadowOpacity: 1,
    elevation: 6,
